@@ -11,8 +11,14 @@ import Ft9 from '../img/ft9.jpeg';
 import Ft10 from '../img/ft10.jpeg';
 import Ft11 from '../img/ft11.jpeg';
 import Ft12 from '../img/ft12.jpeg';
+import Ft13 from '../img/ft13.jpeg';
+import Ft14 from '../img/ft14.jpeg';
+import Ft15 from '../img/ft15.jpeg';
+import Ft16 from '../img/ft16.jpeg';
+import Ft17 from '../img/ft17.jpeg';
 
-const images = [Ft1, Ft2, Ft3, Ft4, Ft5, Ft6, Ft7, Ft8, Ft9, Ft10, Ft11, Ft12];
+
+const images = [Ft1, Ft2, Ft3, Ft4, Ft5, Ft6, Ft7, Ft8, Ft9, Ft10, Ft11, Ft12, Ft13, Ft14, Ft15, Ft16, Ft17];
 
 function ImageSlider() {
   const [currentIndex, setCurrentIndex] = useState(0);
