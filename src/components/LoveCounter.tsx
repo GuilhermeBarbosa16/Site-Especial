@@ -26,18 +26,31 @@ function LoveCounter({ startDate }: LoveCounterProps) {
       const start = new Date(startDate);
       const now = new Date();
 
-      const totalSeconds = Math.floor((now.getTime() - start.getTime()) / 1000);
-      const months = Math.floor(totalSeconds / (30 * 24 * 60 * 60));
-      const days = Math.floor(totalSeconds / (24 * 60 * 60)) % 30;
-      const hours = Math.floor((totalSeconds % (24 * 60 * 60)) / (60 * 60));
-      const minutes = Math.floor((totalSeconds % (60 * 60)) / 60);
-      const seconds = totalSeconds % 60;
+      let years = now.getFullYear() - start.getFullYear();
+      let months = now.getMonth() - start.getMonth();
+      let days = now.getDate() - start.getDate();
 
-      setTimeElapsed({ months, days, hours, minutes, seconds });
+      if (days < 0) {
+        // Ajusta o número de dias pegando o último dia do mês anterior
+        const lastMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+        days += lastMonth.getDate();
+        months--;
+      }
+
+      if (months < 0) {
+        months += 12;
+        years--;
+      }
+
+      const hours = now.getHours();
+      const minutes = now.getMinutes();
+      const seconds = now.getSeconds();
+
+      setTimeElapsed({ months: years * 12 + months, days, hours, minutes, seconds });
     };
 
     calculateTimeElapsed();
-    const timer = setInterval(calculateTimeElapsed, 1000); 
+    const timer = setInterval(calculateTimeElapsed, 1000);
 
     return () => clearInterval(timer);
   }, [startDate]);

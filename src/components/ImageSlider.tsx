@@ -1,4 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import { Navigation, Pagination } from "swiper/modules";
+
 import Ft1 from '../img/ft1.jpeg';
 import Ft2 from '../img/ft2.jpeg';
 import Ft3 from '../img/ft3.jpeg';
@@ -20,48 +25,79 @@ import Ft17 from '../img/ft17.jpeg';
 
 const images = [Ft1, Ft2, Ft3, Ft4, Ft5, Ft6, Ft7, Ft8, Ft9, Ft10, Ft11, Ft12, Ft13, Ft14, Ft15, Ft16, Ft17];
 
-function ImageSlider() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) =>
-        prevIndex === images.length - 1 ? 0 : prevIndex + 1
-      );
-    }, 4000);
-
-    return () => clearInterval(interval);
-  }, []);
+export default function ImageSlider() {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalIndex, setModalIndex] = useState(0);
 
   return (
-    <div className="relative h-[400px] md:h-[600px] rounded-lg overflow-hidden shadow-xl">
-      {images.map((image, index) => (
-        <div
-          key={image}
-          className={`absolute w-full h-full transition-opacity duration-1000 ${index === currentIndex ? 'opacity-100' : 'opacity-0'
-            }`}
-        >
-          <img
-            src={image}
-            alt={`Slide ${index + 1}`}
-            className="w-full h-full object-cover"
-          />
-        </div>
-      ))}
-
-      {/* Indicadores */}
-      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-        {images.map((_, index) => (
-          <button
-            key={index}
-            className={`w-2 h-2 rounded-full ${index === currentIndex ? 'bg-white' : 'bg-white/50'
-              }`}
-            onClick={() => setCurrentIndex(index)}
-          />
+    <div>
+      {/* Main Slider */}
+      <Swiper
+        navigation
+        pagination={{ clickable: true }}
+        modules={[Navigation, Pagination]}
+        className="rounded-lg overflow-hidden"
+      >
+        {images.map((img, index) => (
+          <SwiperSlide key={index}>
+            <div
+              className="relative w-full cursor-pointer flex items-center justify-center"
+              // Define a altura para manter 16:9 com base na largura da viewport
+              style={{ height: "calc(100vw * 9 / 16)" }}
+              onClick={() => {
+                setModalIndex(index);
+                setModalOpen(true);
+              }}
+            >
+              <img
+                src={img}
+                alt={`Slide ${index + 1}`}
+                className="w-full h-full object-contain"
+              />
+            </div>
+          </SwiperSlide>
         ))}
-      </div>
+      </Swiper>
+
+      {/* Modal para visualização em tela cheia */}
+      {modalOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50"
+          onClick={() => setModalOpen(false)}
+        >
+          <div
+            className="w-full h-full relative"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Botão de fechar */}
+            <button
+              className="absolute top-4 right-4 text-white text-3xl z-10"
+              onClick={() => setModalOpen(false)}
+            >
+              &times;
+            </button>
+            <Swiper
+              initialSlide={modalIndex}
+              navigation
+              pagination={{ clickable: true }}
+              modules={[Navigation, Pagination]}
+              className="w-full h-full"
+            >
+              {images.map((img, index) => (
+                <SwiperSlide key={index}>
+                  <div className="flex items-center justify-center h-full">
+                    <img
+                      src={img}
+                      alt={`Fullscreen Slide ${index + 1}`}
+                      className="w-auto h-[80vh] object-contain"
+                    />
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
-
-export default ImageSlider;
