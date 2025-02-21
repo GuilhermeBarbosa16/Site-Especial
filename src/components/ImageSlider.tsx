@@ -21,10 +21,20 @@ import Ft14 from '../img/ft14.jpeg';
 import Ft15 from '../img/ft15.jpeg';
 import Ft16 from '../img/ft16.jpeg';
 import Ft17 from '../img/ft17.jpeg';
+import Ft18 from '../img/ft18.jpeg';
+import Ft19 from '../img/ft19.jpeg';
+import Ft20 from '../img/ft20.jpeg';
+import Ft21 from '../img/ft21.jpeg';
+import Ft22 from '../img/ft22.jpeg';
+import Ft23 from '../img/ft23.jpeg';
+import Ft24 from '../img/ft24.jpeg';
+import Ft25 from '../img/ft25.jpeg';
 
-
-const images = [Ft1, Ft2, Ft3, Ft4, Ft5, Ft6, Ft7, Ft8, Ft9, Ft10, Ft11, Ft12, Ft13, Ft14, Ft15, Ft16, Ft17];
-
+const images = [
+  Ft1, Ft2, Ft3, Ft4, Ft5, Ft6, Ft7, Ft8, Ft9, Ft10,
+  Ft11, Ft12, Ft13, Ft14, Ft15, Ft16, Ft17, Ft18, Ft19, Ft20,
+  Ft21, Ft22, Ft23, Ft24, Ft25
+];
 export default function ImageSlider() {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalIndex, setModalIndex] = useState(0);
