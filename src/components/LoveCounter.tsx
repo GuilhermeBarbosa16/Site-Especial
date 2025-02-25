@@ -23,35 +23,40 @@ function LoveCounter({ startDate }: LoveCounterProps) {
 
   useEffect(() => {
     const calculateTimeElapsed = () => {
+      // Cria a data de início e define para o final do dia (23:59:59.999)
       const start = new Date(startDate);
+      start.setHours(23, 59, 59, 999);
+
       const now = new Date();
 
-      let years = now.getFullYear() - start.getFullYear();
-      let months = now.getMonth() - start.getMonth();
-      let days = now.getDate() - start.getDate();
-
-      if (days < 0) {
-        // Ajusta o número de dias pegando o último dia do mês anterior
-        const lastMonth = new Date(now.getFullYear(), now.getMonth(), 0);
-        days += lastMonth.getDate();
-        months--;
+      // Contabiliza os meses completos de forma iterativa
+      let temp = new Date(start);
+      let monthsCount = 0;
+      while (true) {
+        const nextMonth = new Date(temp);
+        nextMonth.setMonth(nextMonth.getMonth() + 1);
+        if (nextMonth <= now) {
+          monthsCount++;
+          temp = nextMonth;
+        } else {
+          break;
+        }
       }
 
-      if (months < 0) {
-        months += 12;
-        years--;
-      }
+      // Calcula os dias restantes a partir do último marco (temp)
+      const daysCount = Math.floor((now.getTime() - temp.getTime()) / (1000 * 60 * 60 * 24));
 
-      const hours = now.getHours();
-      const minutes = now.getMinutes();
-      const seconds = now.getSeconds();
-
-      setTimeElapsed({ months: years * 12 + months, days, hours, minutes, seconds });
+      setTimeElapsed({
+        months: monthsCount,
+        days: daysCount,
+        hours: now.getHours(),
+        minutes: now.getMinutes(),
+        seconds: now.getSeconds(),
+      });
     };
 
     calculateTimeElapsed();
     const timer = setInterval(calculateTimeElapsed, 1000);
-
     return () => clearInterval(timer);
   }, [startDate]);
 
