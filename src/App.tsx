@@ -1,18 +1,20 @@
 import { Heart } from "lucide-react";
 import ImageSlider from "./components/ImageSlider";
 import LoveCounter from "./components/LoveCounter";
+import MusicPlayer from "./components/MusicPlayer";
 
 function App() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-300 via-purple-300 to-purple-500">
-      <div className="container mx-auto px-4 py-8">
-        {/* Slider Container */}
-        <div className="max-w-3xl mx-auto mb-12">
+    <div className="h-screen bg-gradient-to-br from-pink-300 via-purple-300 to-purple-500 flex items-center justify-center px-4 overflow-hidden md:overflow-auto">
+      {/* Conteúdo */}
+      <div className="relative flex flex-col md:flex-row items-center gap-4">
+        <div className="flex justify-center">
+          <MusicPlayer />
+        </div>
+        <div className="w-full max-w-[200px] md:max-w-[300px] lg:max-w-[350px] sm:max-w-full h-auto rounded-xl overflow-hidden">
           <ImageSlider />
         </div>
-
-        {/* Love Counter Section */}
-        <div className="max-w-2xl mx-auto">
+        <div className="flex flex-col items-center">
           <LoveCounter startDate="2024-10-25" />
           <div className="flex items-center justify-center mt-4 text-white">
             <Heart className="w-6 h-6 text-red-500 mr-2 animate-pulse" />

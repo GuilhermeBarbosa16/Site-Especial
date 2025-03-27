@@ -1,3 +1,26 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Remover o conteúdo padrão das setas */
+.swiper-button-next:after,
+.swiper-button-prev:after {
+  display: none; /* Oculta o conteúdo padrão */
+}
+
+/* Estilos personalizados para as setas */
+.swiper-button-prev,
+.swiper-button-next {
+  background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente */
+  border-radius: 50%; /* Bordas arredondadas */
+  padding: 10px; /* Espaçamento interno */
+  z-index: 10; /* Aumenta o z-index para garantir que as setas fiquem acima de outros elementos */
+  color: white; /* Cor do ícone */
+}
+
+/* Estilo para o hover */
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  background-color: rgba(0, 0, 0, 0.8); /* Escurece ao passar o mouse */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra ao passar o mouse */
+}
