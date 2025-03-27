@@ -9,7 +9,6 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 // Importação das imagens
 import Ft1 from '../img/ft1.jpeg';
 import Ft2 from '../img/ft2.jpeg';
-import Ft3 from '../img/ft3.jpeg';
 import Ft4 from '../img/ft4.jpeg';
 import Ft5 from '../img/ft5.jpeg';
 import Ft6 from '../img/ft6.jpeg';
@@ -37,7 +36,7 @@ import Ft27 from '../img/ft27.jpeg';
 import Ft28 from '../img/ft28.jpeg';
 
 const images = [
-  Ft1, Ft2, Ft3, Ft4, Ft5, Ft6, Ft7, Ft8, Ft9, Ft10,
+  Ft1, Ft2, Ft4, Ft5, Ft6, Ft7, Ft8, Ft9, Ft10,
   Ft11, Ft12, Ft13, Ft14, Ft15, Ft16, Ft17, Ft18, Ft19, Ft20,
   Ft21, Ft22, Ft23, Ft24, Ft25, Ft26, Ft27, Ft28
 ];
