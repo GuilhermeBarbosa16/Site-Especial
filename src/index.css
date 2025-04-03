@@ -24,3 +24,127 @@
   background-color: rgba(0, 0, 0, 0.8); /* Escurece ao passar o mouse */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra ao passar o mouse */
 }
+/* Estilos gerais do ImageSlider */
+.image-slider-container {
+  @apply relative w-full;
+}
+
+/* Slider principal */
+.main-swiper {
+  @apply rounded-lg overflow-hidden shadow-lg;
+}
+
+.swiper-slide-custom {
+  @apply flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-lg overflow-hidden;
+}
+
+.slide-container {
+  @apply relative w-full flex items-center justify-center cursor-pointer;
+  height: calc(100vw * 9 / 16);
+  max-height: 500px;
+}
+
+.slide-image {
+  @apply w-full h-full p-2 object-cover rounded-lg transition-transform duration-300;
+}
+
+.slide-container:hover .slide-image {
+  transform: scale(1.02);
+}
+
+/* Navegação */
+.swiper-button-prev,
+.swiper-button-next {
+  @apply absolute top-1/2 transform -translate-y-1/2 p-3 rounded-full cursor-pointer bg-black/30 hover:bg-black/50 transition-all z-10;
+}
+
+.swiper-button-prev {
+  @apply left-2;
+}
+
+.swiper-button-next {
+  @apply right-2;
+}
+
+.nav-icon {
+  @apply text-white w-8 h-8;
+}
+
+/* Paginação */
+.swiper-pagination-bullet {
+  @apply bg-white opacity-60;
+}
+
+.swiper-pagination-bullet-active {
+  @apply bg-pink-500 opacity-100;
+}
+
+/* Modal */
+.modal-overlay {
+  @apply fixed inset-0 bg-black/95 flex items-center justify-center z-50 backdrop-blur-sm;
+}
+
+.modal-content {
+  @apply w-full h-full max-w-6xl mx-auto relative flex items-center;
+}
+
+.modal-close-btn {
+  @apply absolute top-6 right-6 text-white text-4xl z-10 hover:text-pink-300 transition-all;
+}
+
+.modal-swiper {
+  @apply w-full h-full;
+}
+
+.modal-slide {
+  @apply flex items-center justify-center p-10;
+}
+
+.modal-image {
+  @apply max-w-full max-h-full object-contain rounded-lg;
+}
+
+.swiper-button-prev-modal,
+.swiper-button-next-modal {
+  @apply absolute top-1/2 transform -translate-y-1/2 p-3 rounded-full cursor-pointer bg-black/50 hover:bg-black/80 transition-all z-10;
+}
+
+.swiper-button-prev-modal {
+  @apply left-6;
+}
+
+.swiper-button-next-modal {
+  @apply right-6;
+}
+
+.modal-nav-icon {
+  @apply text-white w-10 h-10;
+}
+
+/* Paginação no modal */
+.swiper-pagination-fraction {
+  @apply text-white text-lg font-medium;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .slide-container {
+    height: 60vh;
+  }
+  
+  .modal-slide {
+    @apply p-4;
+  }
+  
+  .modal-nav-icon {
+    @apply w-8 h-8;
+  }
+  
+  .swiper-button-prev-modal {
+    @apply left-2;
+  }
+  
+  .swiper-button-next-modal {
+    @apply right-2;
+  }
+}

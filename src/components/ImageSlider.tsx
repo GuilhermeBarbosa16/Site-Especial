@@ -40,17 +40,14 @@ const images = [
   Ft11, Ft12, Ft13, Ft14, Ft15, Ft16, Ft17, Ft18, Ft19, Ft20,
   Ft21, Ft22, Ft23, Ft24, Ft25, Ft26, Ft27, Ft28
 ];
-
 export default function ImageSlider() {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalIndex, setModalIndex] = useState(0);
-
-  // Ref para o Swiper no modal e no slider principal
   const swiperRef = useRef(null);
   const swiperModalRef = useRef(null);
 
   return (
-    <div className="relative w-full">
+    <div className="image-slider-container">
       {/* Slider Principal */}
       <Swiper
         ref={swiperRef}
@@ -60,83 +57,80 @@ export default function ImageSlider() {
         }}
         pagination={{ clickable: true }}
         modules={[Navigation, Pagination]}
-        className="rounded-lg overflow-hidden"
+        className="main-swiper"
+        spaceBetween={10}
+        slidesPerView={1}
+        centeredSlides={true}
+        loop={true}
+        autoplay={{
+          delay: 3000,
+          disableOnInteraction: false,
+        }}
       >
         {images.map((img, index) => (
-          <SwiperSlide key={index}>
+          <SwiperSlide key={index} className="swiper-slide-custom">
             <div
-              className="relative w-full flex items-center justify-center cursor-pointer"
-              style={{ height: "calc(100vw * 9 / 16)" }}
+              className="slide-container"
               onClick={() => {
                 setModalIndex(index);
                 setModalOpen(true);
               }}
             >
-              <div className="w-full h-auto aspect-[16/9] ">
-                <img
-                  src={img}
-                  alt={`Foto ${index + 1}`}
-                  className="w-full h-full object-contain"
-                />
-              </div>
+              <img
+                src={img}
+                alt={`Foto ${index + 1}`}
+                className="slide-image"
+              />
             </div>
           </SwiperSlide>
         ))}
 
-        {/* Setas personalizadas */}
-        <div className="swiper-button-prev absolute left-2 top-1/2 transform -translate-y-1/2 p-3 rounded-full cursor-pointer">
-          <ChevronLeft className="text-white w-6 h-6" />
+        <div className="swiper-button-prev">
+          <ChevronLeft className="nav-icon" />
         </div>
-        <div className="swiper-button-next absolute right-2 top-1/2 transform -translate-y-1/2 p-3 rounded-full cursor-pointer">
-          <ChevronRight className="text-white w-6 h-6" />
+        <div className="swiper-button-next">
+          <ChevronRight className="nav-icon" />
         </div>
       </Swiper>
 
       {/* Modal para tela cheia */}
       {modalOpen && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50"
-          onClick={() => setModalOpen(false)}
-        >
-          <div className="w-full h-full relative" onClick={(e) => e.stopPropagation()}>
-            {/* Botão de fechar */}
+        <div className="modal-overlay" onClick={() => setModalOpen(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <button
-              className="absolute top-4 right-4 text-white text-3xl z-10"
+              className="modal-close-btn"
               onClick={() => setModalOpen(false)}
             >
               &times;
             </button>
 
-            {/* Slider dentro do modal */}
             <Swiper
-              ref={swiperRef}
+              ref={swiperModalRef}
+              initialSlide={modalIndex}
               navigation={{
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev",
+                nextEl: ".swiper-button-next-modal",
+                prevEl: ".swiper-button-prev-modal",
               }}
-              pagination={{ clickable: true }}
+              pagination={{ clickable: true, type: 'fraction' }}
               modules={[Navigation, Pagination]}
-              className="rounded-lg overflow-hidden"
+              className="modal-swiper"
             >
               {images.map((img, index) => (
-             <SwiperSlide key={index} className="flex items-center justify-center">
-             <div className="relative w-full h-auto aspect-[4/3] max-w-[600px] md:max-w-[700px] lg:max-w-[800px] xl:max-w-[900px]">
-               <img
-                 src={img}
-                 alt={`Foto ${index + 1}`}
-                 className="w-full h-full object-contain"
-               />
-             </div>
-           </SwiperSlide>              
+                <SwiperSlide key={index} className="modal-slide">
+                  <img
+                    src={img}
+                    alt={`Foto ${index + 1}`}
+                    className="modal-image"
+                  />
+                </SwiperSlide>
               ))}
             </Swiper>
 
-            {/* Setas no modal */}
-            <div className="swiper-button-prev-modal absolute left-4 top-1/2 transform -translate-y-1/2 p-3 rounded-full cursor-pointer hover:text-gray-300 hover:shadow-lg transition-all">
-              <ChevronLeft className="text-white w-8 h-8" />
+            <div className="swiper-button-prev-modal">
+              <ChevronLeft className="modal-nav-icon" />
             </div>
-            <div className="swiper-button-next-modal absolute right-4 top-1/2 transform -translate-y-1/2 p-3 rounded-full cursor-pointer hover:text-gray-300 hover:shadow-lg transition-all">
-              <ChevronRight className="text-white w-8 h-8" />
+            <div className="swiper-button-next-modal">
+              <ChevronRight className="modal-nav-icon" />
             </div>
           </div>
         </div>
