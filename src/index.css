@@ -3,12 +3,27 @@
 @tailwind utilities;
 
 /* Adicione ao seu CSS */
-html {
-  scroll-behavior: smooth;
+/* Garante que não haverá rolagem horizontal */
+html, body {
+  overflow-x: hidden;
+  width: 100%;
 }
 
+/* Previne qualquer deslocamento horizontal */
 body {
-  overscroll-behavior-y: contain;
+  position: relative;
+}
+/* Melhora a experiência em iOS */
+@supports (-webkit-touch-callout: none) {
+  body {
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Container principal - garante contenção */
+#root {
+  overflow-x: hidden;
 }
 /* Remover o conteúdo padrão das setas */
 .swiper-button-next:after,
@@ -189,10 +204,5 @@ body {
   .modal-image {
     max-width: 100vw;
     max-height: 80vh;
-  }
-}
-@supports (-webkit-touch-callout: none) {
-  .image-slider-container {
-    height: -webkit-fill-available;
   }
 }
