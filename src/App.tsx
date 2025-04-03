@@ -2,18 +2,21 @@ import { Heart } from "lucide-react";
 import ImageSlider from "./components/ImageSlider";
 import LoveCounter from "./components/LoveCounter";
 import MusicPlayer from "./components/MusicPlayer";
+
 function App() {
   return (
-    <div className="h-screen bg-gradient-to-br from-pink-300 via-purple-300 to-purple-500 flex items-center justify-center px-4 overflow-hidden md:overflow-auto">
+    <div className="min-h-screen bg-gradient-to-br from-pink-300 via-purple-300 to-purple-500 flex items-center justify-center px-4 overflow-y-auto md:overflow-auto">
       {/* Conteúdo */}
-      <div className="relative flex flex-col md:flex-row items-center gap-8 md:gap-12 lg:gap-16"> {/* Aumentei o espaçamento */}
+      <div className="relative flex flex-col md:flex-row items-center gap-8 md:gap-12 lg:gap-16 py-8 md:py-0">
         <div className="flex justify-center">
           <MusicPlayer />
         </div>
-        {/* Container do slider - aumentei a largura máxima */}
-        <div className="w-full max-w-[280px] md:max-w-[400px] lg:max-w-[500px] h-auto rounded-xl overflow-hidden shadow-xl"> {/* Adicionei sombra */}
+        
+        {/* Container do slider - removi overflow-hidden aqui */}
+        <div className="w-full max-w-[280px] md:max-w-[400px] lg:max-w-[500px] h-auto rounded-xl shadow-xl">
           <ImageSlider />
         </div>
+        
         <div className="flex flex-col items-center">
           <LoveCounter startDate="2024-10-25" />
           <div className="flex items-center justify-center mt-4 text-white">

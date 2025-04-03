@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Adicione ao seu CSS */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  overscroll-behavior-y: contain;
+}
 /* Remover o conteúdo padrão das setas */
 .swiper-button-next:after,
 .swiper-button-prev:after {
@@ -146,5 +154,40 @@
   
   .swiper-button-next-modal {
     @apply right-2;
+  }
+}
+/* Adicione estas regras específicas para mobile */
+@media (max-width: 640px) {
+  .slide-container {
+    height: 70vh !important; /* Altura mais adequada para mobile */
+    touch-action: pan-y; /* Permite rolagem vertical */
+  }
+
+  .main-swiper {
+    overflow: visible !important; /* Importante para o touch funcionar */
+  }
+
+  .swiper-slide-custom {
+    padding: 8px; /* Espaçamento menor em mobile */
+  }
+
+  .slide-image {
+    pointer-events: auto; /* Garante que o touch funciona */
+  }
+
+  /* Ajuste das setas em mobile */
+  .swiper-button-prev,
+  .swiper-button-next {
+    display: none; /* Opcional: esconder setas em mobile */
+  }
+
+  /* Ajuste do modal em mobile */
+  .modal-slide {
+    padding: 0 !important;
+  }
+
+  .modal-image {
+    max-width: 100vw;
+    max-height: 80vh;
   }
 }

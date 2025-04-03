@@ -1,9 +1,10 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination } from "swiper/modules";
+import type { Swiper as SwiperType } from 'swiper';
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { Navigation, Pagination } from "swiper/modules";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 // Importação das imagens
@@ -40,17 +41,28 @@ const images = [
   Ft11, Ft12, Ft13, Ft14, Ft15, Ft16, Ft17, Ft18, Ft19, Ft20,
   Ft21, Ft22, Ft23, Ft24, Ft25, Ft26, Ft27, Ft28
 ];
+
 export default function ImageSlider() {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalIndex, setModalIndex] = useState(0);
-  const swiperRef = useRef(null);
-  const swiperModalRef = useRef(null);
+
+  const swiperRef = useRef<SwiperType | null>(null);
+  const swiperModalRef = useRef<SwiperType | null>(null);
+
+  // Configuração para mobile
+  useEffect(() => {
+    if (swiperRef.current) {
+      // Configurações de touch diretamente na instância
+      swiperRef.current.params.touchEventsTarget = 'container';
+      swiperRef.current.update();
+    }
+  }, []);
 
   return (
     <div className="image-slider-container">
       {/* Slider Principal */}
       <Swiper
-        ref={swiperRef}
+        onSwiper={(swiper) => (swiperRef.current = swiper)}
         navigation={{
           nextEl: ".swiper-button-next",
           prevEl: ".swiper-button-prev",
@@ -66,21 +78,19 @@ export default function ImageSlider() {
           delay: 3000,
           disableOnInteraction: false,
         }}
+        // Configurações de touch corretas
+        touchEventsTarget="container"
+        allowTouchMove={true}
+        noSwiping={false}
+        noSwipingClass="swiper-slide"
       >
         {images.map((img, index) => (
-          <SwiperSlide key={index} className="swiper-slide-custom">
-            <div
-              className="slide-container"
-              onClick={() => {
-                setModalIndex(index);
-                setModalOpen(true);
-              }}
-            >
-              <img
-                src={img}
-                alt={`Foto ${index + 1}`}
-                className="slide-image"
-              />
+          <SwiperSlide key={index}>
+            <div className="slide-container" onClick={() => {
+              setModalIndex(index);
+              setModalOpen(true);
+            }}>
+              <img src={img} alt={`Foto ${index + 1}`} className="slide-image" />
             </div>
           </SwiperSlide>
         ))}
@@ -105,7 +115,9 @@ export default function ImageSlider() {
             </button>
 
             <Swiper
-              ref={swiperModalRef}
+              onSwiper={(swiper) => {
+                swiperModalRef.current = swiper;
+              }}
               initialSlide={modalIndex}
               navigation={{
                 nextEl: ".swiper-button-next-modal",
