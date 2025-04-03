@@ -191,3 +191,8 @@ body {
     max-height: 80vh;
   }
 }
+@supports (-webkit-touch-callout: none) {
+  .image-slider-container {
+    height: -webkit-fill-available;
+  }
+}
