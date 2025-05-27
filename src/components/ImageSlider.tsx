@@ -35,11 +35,23 @@ import Ft25 from '../img/ft25.jpeg';
 import Ft26 from '../img/ft26.jpeg';
 import Ft27 from '../img/ft27.jpeg';
 import Ft28 from '../img/ft28.jpeg';
+import Ft29 from '../img/ft29.jpeg';
+import Ft30 from '../img/ft30.jpeg';
+import Ft31 from '../img/ft31.jpeg';
+import Ft32 from '../img/ft32.jpeg';
+import Ft33 from '../img/ft33.jpeg';
+import Ft34 from '../img/ft34.jpeg';
+import Ft35 from '../img/ft35.jpeg';
+import Ft36 from '../img/ft36.jpeg';
+import Ft37 from '../img/ft37.jpeg';
+import Ft38 from '../img/ft38.jpeg';
+import Ft39 from '../img/ft39.jpeg';
 
 const images = [
   Ft1, Ft2, Ft4, Ft5, Ft6, Ft7, Ft8, Ft9, Ft10,
   Ft11, Ft12, Ft13, Ft14, Ft15, Ft16, Ft17, Ft18, Ft19, Ft20,
-  Ft21, Ft22, Ft23, Ft24, Ft25, Ft26, Ft27, Ft28
+  Ft21, Ft22, Ft23, Ft24, Ft25, Ft26, Ft27, Ft28, Ft29, Ft30,
+  Ft31, Ft32, Ft33, Ft34, Ft35, Ft36, Ft37, Ft38, Ft39
 ];
 
 export default function ImageSlider() {
